@@ -6,3 +6,5 @@ log.txt
 /imgs
 *.pptx
 /formato
+__pycache__
+.pyc
