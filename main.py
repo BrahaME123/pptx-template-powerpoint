@@ -12,7 +12,6 @@ def get_value(filename="log.txt"):
         return val
 
 
-formato = ["EJEMPLO", "Salvia 116", "10:00 PM", "Lunes 20 de junio del 2025"]
 
 
 """
@@ -36,35 +35,49 @@ slide = prs.slides[0]
 """
 
     
+def replace_text(shape,new_text):
+    if not shape.has_text_frame:
+        return
+    for paragraph in shape.text_frame.paragraphs:
+        if paragraph.runs:
+            paragraph.runs[0].text = new_text
+            for run in paragraph.runs[1:]:
+                run.text = ""
+            break
 
+
+    
+    
+    # for paragraph in shape.text_frame.paragraphs:
+    #     for run in paragraph.runs:
+    #         run.text = formato[0]
+
+
+        # for paragraph in shape.text_frame.paragraphs:
+
+        #     for run in paragraph.runs:
+        #         shape.text_frame.clear()
+        #         run.text = formato[1]                
+        #         #for run in paragraph.runs:             
+        #         # run.text = formato[1]
+        #         # print(run.text)
+        
+
+
+formato = ["Victor david", "alex tobias", "cristian suñiga", "piter es joto"]
 
 for shape in slide.shapes:
 
     if shape.name == 'colonia':
-        for paragraph in shape.text_frame.paragraphs:
-            for run in paragraph.runs:
-                run.text = formato[0]                                                                
+        replace_text(shape, formato[0])
+                                                                    
     elif shape.name == 'lugar':
-        
-        for paragraph in shape.text_frame.paragraphs:
-
-            for run in paragraph.runs:
-                shape.text_frame.clear()
-                run.text = formato[1]                
-                #for run in paragraph.runs:             
-                # run.text = formato[1]
-                # print(run.text)
+        replace_text(shape, formato[1])
         
     elif shape.name == 'hora':
-        for paragraph in shape.text_frame.paragraphs:
-            for run in paragraph.runs:
-                    run.text = formato[2]      
-                    print(run.text)              
-                
+        replace_text(shape, formato[2])
     elif shape.name == 'fecha':
-            for paragraph in shape.text_frame.paragraphs:
-                for run in paragraph.runs:
-                    print(run.text)
+        replace_text(shape,formato[3])
 
 
     
