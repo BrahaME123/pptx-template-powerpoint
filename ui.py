@@ -1,6 +1,7 @@
 import customtkinter
 from pptx_handler import generar_power
 from tkinter import filedialog
+
 class App:
     def __init__(self):
         customtkinter.set_appearance_mode("dark")
@@ -14,6 +15,7 @@ class App:
         
         
     def _build_ui(self):
+        
         def Login():
             colonia_valor = entry1.get()
             fecha_valor = entry2.get()
@@ -25,6 +27,7 @@ class App:
                 resultado_label.configure(text = "Llena todos los campos para generar el archivo correctamente.")
                 return
             
+         
             ruta = filedialog.asksaveasfilename(defaultextension=".pptx", filetypes=[("PowerPoint", "*.pptx")])
             
             if not ruta:
@@ -60,7 +63,8 @@ class App:
         button = customtkinter.CTkButton(master=frame, text="Generar", command=Login, hover_color="black" )
         button.pack(pady=12, padx=10) 
         resultado_label = customtkinter.CTkLabel(master=frame, text="")
-        resultado_label.pack(pady=10) 
+        resultado_label.pack(pady=20)         
+        
         
         
         exit = customtkinter.CTkButton(master=frame, text="Salir", command=Salir, hover_color="red")

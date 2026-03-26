@@ -27,6 +27,8 @@ def generar_power(colonia, lugar, fecha, hora, ruta):
     def replace_text(shape,new_text):
         if not shape.has_text_frame:
             return
+        
+        
         for paragraph in shape.text_frame.paragraphs:
             if paragraph.runs:
                 paragraph.runs[0].text = new_text
