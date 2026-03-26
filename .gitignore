@@ -3,3 +3,6 @@ log.txt
 .env
 .vscode
 .pyc
+/imgs
+*.pptx
+/formato
