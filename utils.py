@@ -1,8 +1,14 @@
 import json
+import sys
 import os
-from pptx_handler import fuente_direccion
-ruta_json = fuente_direccion('config.json')
-FILE = ruta_json
+
+def obtener_dir(filename):
+    if getattr(sys, 'frozen', False):
+        base_dir = os.path.dirname(sys.executable)
+    else:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_dir,filename)
+FILE = obtener_dir('config.json')
 
 def cargar_info():
     if not os.path.exists(FILE):

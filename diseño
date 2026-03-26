@@ -2,3 +2,6 @@ NOMBRE COLONIA
 FECHA: (dia)(numero) de (mes) del (año)
 hora: (numero) AM O PM
 Lugar: (direccion)
+
+TODO:::
+EL EXE NO GUARDA EL HISTORIAL DE GENERACIONES EN EL JSON, Y SOLO MUESTRA ANTERIORES

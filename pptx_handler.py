@@ -3,8 +3,17 @@ import os
 import sys
 
 def fuente_direccion(dir):
-    dir_base = sys._MEIPASS
-    return os.path.join(dir_base,dir)    
+    if getattr(sys, 'frozen', False):
+        base_dir = sys._MEIPASS
+        
+    else:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_dir, dir)
+    
+    
+    
+    # dir_base = sys._MEIPASS
+    # return os.path.join(dir_base , dir)    
 
 def generar_power(colonia, lugar, fecha, hora, ruta):
     ruta_formato = fuente_direccion("formato_3.pptx")
@@ -59,8 +68,10 @@ def generar_power(colonia, lugar, fecha, hora, ruta):
             replace_text(shape,fecha)
 
     contador = get_value()
-    nombre_archivo = f"{contador}.pptx"
-    archivo_salida = os.path.join(os.getcwd(), nombre_archivo)
+    # nombre_archivo = f"{contador}.pptx"
+    # if nombre_archivo == "":
+        # print('ERR:: NOMBRE_ARCHIVO FALLÓ')
+    # archivo_salida = os.path.join(os.getcwd(), nombre_archivo)
     prs.save(ruta)
     os.startfile(ruta)
     return ruta
