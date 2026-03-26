@@ -12,7 +12,7 @@ def get_value(filename="log.txt"):
         return val
 
 
-formato = ["EJEMPLO", "Trueno 1108", "10:00 PM", "Lunes 20 de junio del 2025"]
+formato = ["EJEMPLO", "Salvia 116", "10:00 PM", "Lunes 20 de junio del 2025"]
 
 
 """
