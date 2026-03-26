@@ -10,3 +10,9 @@ __pycache__
 .pyc
 .pptx
 .json
+/dist 
+/build
+*.exe
+*.spec
+__pycache__/
+*.pyc
