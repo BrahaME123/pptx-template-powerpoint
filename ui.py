@@ -30,8 +30,8 @@ class App:
             if not ruta:
                 return
             archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta)
-            resultado_label.configure(text=f"Archivo generado correctamente. {archivo}.pptx")
-            print(f'powerpoint generado: {archivo}.pptx ')
+            resultado_label.configure(text=f"Archivo generado correctamente. {ruta}")
+            print(f'powerpoint generado: {ruta} ')
         
         def Salir():
             self.root.destroy()

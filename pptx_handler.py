@@ -54,7 +54,7 @@ def generar_power(colonia, lugar, fecha, hora, ruta):
     contador = get_value()
     nombre_archivo = f"{contador}.pptx"
     prs.save(ruta)
-    os.startfile(nombre_archivo)
-    return contador
+    os.startfile(ruta)
+    return ruta
 
     
