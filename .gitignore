@@ -16,3 +16,4 @@ __pycache__
 *.spec
 __pycache__/
 *.pyc
+.png
