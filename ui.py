@@ -11,6 +11,7 @@ class App:
         self.root = customtkinter.CTk()
         self.root.title("Generar PowerPoint")
         self.root.geometry('1200x950')
+        self.root.iconbitmap('')
         self.style = ttk.Style()
         self.style.theme_use("vista")
         self.style.configure("Treeview", background = "black",foreground = "white", fieldbackground = "light cyan")

@@ -1,9 +1,14 @@
 from pptx import *
 import os
+import sys
 
+def fuente_direccion(dir):
+    dir_base = sys._MEIPASS
+    return os.path.join(dir_base,dir)    
 
 def generar_power(colonia, lugar, fecha, hora, ruta):
-    prs = Presentation("formato_3.pptx")
+    ruta_formato = fuente_direccion("formato_3.pptx")
+    prs = Presentation(ruta_formato)
 
     def get_value(filename="log.txt"):
         with open(filename, "a+") as f:
@@ -55,6 +60,7 @@ def generar_power(colonia, lugar, fecha, hora, ruta):
 
     contador = get_value()
     nombre_archivo = f"{contador}.pptx"
+    archivo_salida = os.path.join(os.getcwd(), nombre_archivo)
     prs.save(ruta)
     os.startfile(ruta)
     return ruta

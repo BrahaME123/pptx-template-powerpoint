@@ -1,7 +1,8 @@
 import json
 import os
-
-FILE = "config.json"
+from pptx_handler import fuente_direccion
+ruta_json = fuente_direccion('config.json')
+FILE = ruta_json
 
 def cargar_info():
     if not os.path.exists(FILE):
