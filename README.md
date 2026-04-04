@@ -14,4 +14,4 @@ Luego das click a Generar y escribes el nombre de tu archivo pptx y lugar donde 
 la tabla de abajo dice los archivos que has generado, y tambien la dirección de dicho archivo.
 
 
-![App Screenhot](app.png)
+![App Screenhot](app1.png)
