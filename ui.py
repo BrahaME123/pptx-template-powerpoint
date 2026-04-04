@@ -1,6 +1,6 @@
 import customtkinter
 from pptx_handler import generar_power
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 from tkinter import ttk
 import os 
 from utils import *
@@ -20,6 +20,8 @@ class App:
         
     def _build_ui(self):
         
+     
+        
         def Login():
             colonia_valor = entry1.get()
             fecha_valor = entry2.get()
@@ -31,8 +33,11 @@ class App:
                 resultado_label.configure(text = "Llena todos los campos para generar el archivo correctamente.")
                 return
             
-         
-            ruta = filedialog.asksaveasfilename(defaultextension=".pptx", filetypes=[("PowerPoint", "*.pptx")])
+            carpeta = crear_carpeta()
+            nombre_archivo = f"{colonia_valor}_{fecha_valor}.pptx"
+            ruta = os.path.join(carpeta, nombre_archivo)
+
+            
             
             if not ruta:
                 return 
@@ -45,6 +50,57 @@ class App:
         
         def Salir():
             self.root.destroy()
+           
+           
+           
+        def eliminar_archivo():
+            
+            selected = tabla.selection()
+            
+            if not selected:
+                messagebox.showwarning("Error", "No ha seleccionado un archivo para eliminar")
+                return
+            
+            ruta = tabla.item(selected[0])["values"][1]
+            
+        
+            
+            if os.path.exists(ruta):
+                os.remove(ruta)
+                for row in tabla.get_children():
+                 if tabla.item(row)["values"][1] == ruta:
+                    tabla.delete(row)
+                    break
+                eliminar_json(ruta)
+            else:
+                messagebox.showerror("Error", "La convocatoria no existe.")    
+            
+            print(ruta)
+            
+            
+        def crear_carpeta():
+            
+            directorio =  os.path.join(os.path.expanduser("~"),"Documentos")
+            carpeta = os.path.join(directorio,"CONVOCATORIAS GENERADAS")
+            if not os.path.exists(carpeta):
+                os.makedirs(carpeta, exist_ok=True)
+                print(f"carpeta creada: {carpeta} ")
+        
+            return carpeta
+          
+        def abrir_archivo():
+            selected = tabla.selection()
+            
+            if not selected:
+                messagebox.showwarning("Error", "No ha seleccionado una convocatoria para abrir")
+                return
+            
+            item = tabla.item(selected[0])
+            ruta = item["values"][1]
+            if os.path.exists(ruta):
+                os.startfile(ruta)
+            else:
+                messagebox.showerror("Error", "La convocatiroa no existe.")
             
         
                     
@@ -68,16 +124,23 @@ class App:
         lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: ")
         lugar.pack(pady=12, padx=10)
         
-        button = customtkinter.CTkButton(master=frame, text="Generar", command=Login, hover_color="black" )
-        button.pack(pady=12, padx=10) 
+        
+        frame2 =  customtkinter.CTkFrame(master=self.root)
+        
+        button = customtkinter.CTkButton(master=frame2, text="Generar", command=lambda:(crear_carpeta(), Login()) , hover_color="black" )
+        button.grid(row = 0, column = 0, padx=10) 
         resultado_label = customtkinter.CTkLabel(master=frame, text="")
         resultado_label.pack(pady=5)         
         
-        exit = customtkinter.CTkButton(master=frame, text="Salir", command=Salir, hover_color="red")
-        exit.pack(pady=20, padx = 15)
+        exit = customtkinter.CTkButton(master=frame2, text="Salir", command=Salir, hover_color="red")
+        exit.grid(row = 0, column = 1, padx=10) 
         
-    
-    
+        abrir = customtkinter.CTkButton(master=frame2, text="Abrir Convocatoria", command=abrir_archivo, hover_color="green")
+        abrir.grid(row = 0, column = 2, padx=10) 
+        eliminar = customtkinter.CTkButton(master=frame2, text="Eliminar Convocatoria", command=eliminar_archivo, hover_color="red")
+        eliminar.grid(row = 0, column = 3, padx=10)
+
+        frame2.pack(padx=20, pady=10)
     
         # frame2 = customtkinter.CTkFrame(master=self.root)
         # frame2.pack(pady=10, padx=60, fill="x")
@@ -107,7 +170,7 @@ class App:
         tabla.heading('Direccion', text="Direccion del Archivo")
         tabla.column('Nombre', width=500)
         tabla.column('Direccion', width=900)
-        tabla.pack(padx=10, pady=10)
+        tabla.pack(padx=10, pady=20)
         #datos en la tabls
         def cargar_tabla():
             for fila in tabla.get_children():
@@ -118,6 +181,7 @@ class App:
                 tabla.insert("", 'end', values=(item["nombre"], item["ruta"]))
             
         cargar_tabla()
+        
         
     def run(self):
         self.root.mainloop()

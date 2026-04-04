@@ -28,3 +28,8 @@ def agregar_archivo(nombre, ruta):
         "ruta": ruta
     })
     guardar_info(datos)
+
+def eliminar_json(ruta):
+    datos = cargar_info()
+    nuevos = [item for item in datos if item["ruta"] != ruta]
+    guardar_info(nuevos)

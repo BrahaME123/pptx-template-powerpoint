@@ -1,6 +1,9 @@
 from pptx import *
 import os
+from pathlib import Path
 import sys
+import tkinter as tk
+from tkinter import messagebox
 
 def fuente_direccion(dir):
     if getattr(sys, 'frozen', False):
@@ -15,6 +18,8 @@ def fuente_direccion(dir):
     # dir_base = sys._MEIPASS
     # return os.path.join(dir_base , dir)    
 
+
+        
 def generar_power(colonia, lugar, fecha, hora, ruta):
     ruta_formato = fuente_direccion("formato_3.pptx")
     prs = Presentation(ruta_formato)
@@ -72,6 +77,8 @@ def generar_power(colonia, lugar, fecha, hora, ruta):
     # if nombre_archivo == "":
         # print('ERR:: NOMBRE_ARCHIVO FALLÓ')
     # archivo_salida = os.path.join(os.getcwd(), nombre_archivo)
+    
+    
     prs.save(ruta)
     os.startfile(ruta)
     return ruta
