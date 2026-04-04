@@ -10,7 +10,7 @@ class App:
         customtkinter.set_default_color_theme("green")
         self.root = customtkinter.CTk()
         self.root.title("Generar PowerPoint")
-        self.root.geometry('1200x950')
+        self.root.state("zoomed")
         self.root.iconbitmap('')
         self.style = ttk.Style()
         self.style.theme_use("vista")
@@ -72,6 +72,7 @@ class App:
                     tabla.delete(row)
                     break
                 eliminar_json(ruta)
+                resultado_label.configure(text="ARCHIVO ELIMINADO CORRECTAMENTE.")
             else:
                 messagebox.showerror("Error", "La convocatoria no existe.")    
             
