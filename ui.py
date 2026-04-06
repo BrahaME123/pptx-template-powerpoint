@@ -12,7 +12,7 @@ class App:
         self.root = customtkinter.CTk()
         self.x, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
         self.root.geometry("%dx%d+0+0" % (self.x, self.h-80))
-        self.root.title("Generar PowerPoint")
+        self.root.title("Generar Convocatoria")
         self.root.iconbitmap('')
         self.style = ttk.Style()
         self.style.theme_use("vista")
@@ -35,21 +35,22 @@ class App:
                 resultado_label.configure(text = "Llena todos los campos para generar el archivo correctamente.")
                 return
             
-            carpeta = crear_carpeta()
-            nombre_archivo = f"{colonia_valor}_{fecha_valor}.pptx"
-            ruta = os.path.join(carpeta, nombre_archivo)
+            else:
+                carpeta = crear_carpeta()
+                nombre_archivo = f"{colonia_valor}_{fecha_valor}.pptx"
+                ruta = os.path.join(carpeta, nombre_archivo)
 
-            
-            
-            if not ruta:
-                return 
-            archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta)
-            resultado_label.configure(text=f"Archivo generado correctamente. {ruta}")
-            print(f'powerpoint generado: {ruta} ')
-            
-            nombre_archivo = os.path.basename(ruta)
-            agregar_archivo(nombre_archivo,ruta)
-            cargar_tabla()
+                
+                
+                if not ruta:
+                    return 
+                archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta)
+                resultado_label.configure(text=f"Archivo generado correctamente. {ruta}")
+                print(f'powerpoint generado: {ruta} ')
+                
+                nombre_archivo = os.path.basename(ruta)
+                agregar_archivo(nombre_archivo,ruta)
+                cargar_tabla()
         
         def Salir():
             self.root.destroy()
@@ -61,7 +62,7 @@ class App:
             selected = tabla.selection()
             
             if not selected:
-                messagebox.showwarning("Error", "No ha seleccionado un archivo para eliminar")
+                resultado_label.configure(text="No se ha seleccionado ningun archivo para eliminar, selecciona uno de la tabla primero.")
                 return
             
             ruta = tabla.item(selected[0])["values"][1]
@@ -77,7 +78,7 @@ class App:
                 eliminar_json(ruta)
                 resultado_label.configure(text="ARCHIVO ELIMINADO CORRECTAMENTE.")
             else:
-                messagebox.showerror("Error", "La convocatoria no existe.")    
+                resultado_label.configure(text="La convocatoria que intentas eliminar no existe.")
             
             print(ruta)
             
@@ -96,14 +97,14 @@ class App:
             if os.path.exists(carpeta):
                 os.startfile(carpeta)
             else:
-                messagebox.showerror("Error", "La carpeta donde se guardan las convocatorias no existe.")
+                resultado_label.configure(text="La carpeta donde se guardan las convocatorias no existe.")
           
           
         def abrir_archivo():
             selected = tabla.selection()
             
             if not selected:
-                messagebox.showwarning("Error", "No ha seleccionado una convocatoria para abrir")
+                resultado_label.configure(text="No ha seleccionado una convocatoria para abrir.")
                 return
             
             item = tabla.item(selected[0])
@@ -111,16 +112,14 @@ class App:
             if os.path.exists(ruta):
                 os.startfile(ruta)
             else:
-                messagebox.showerror("Error", "La convocatiroa no existe.")
+                resultado_label.configure(text="La convocatoria que intentas abrir no existe.")
             
         
                     
         frame = customtkinter.CTkFrame(master=self.root)
         frame.pack(pady=20, padx=60, fill="both", expand=True)
-
-        
                 
-        label = customtkinter.CTkLabel(master=frame, text="Generar PowerPoint", font=("Verdana", 24))
+        label = customtkinter.CTkLabel(master=frame, text="Generar Convocatoria", font=("Verdana", 24))
         label.pack(pady=12, padx=10)
         
         entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Colonia: ")
