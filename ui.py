@@ -8,9 +8,11 @@ class App:
     def __init__(self):
         customtkinter.set_appearance_mode("dark")
         customtkinter.set_default_color_theme("green")
+        
         self.root = customtkinter.CTk()
+        self.x, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
+        self.root.geometry("%dx%d+0+0" % (self.x, self.h-80))
         self.root.title("Generar PowerPoint")
-        self.root.state("zoomed")
         self.root.iconbitmap('')
         self.style = ttk.Style()
         self.style.theme_use("vista")
@@ -44,6 +46,7 @@ class App:
             archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta)
             resultado_label.configure(text=f"Archivo generado correctamente. {ruta}")
             print(f'powerpoint generado: {ruta} ')
+            
             nombre_archivo = os.path.basename(ruta)
             agregar_archivo(nombre_archivo,ruta)
             cargar_tabla()
@@ -86,8 +89,15 @@ class App:
             if not os.path.exists(carpeta):
                 os.makedirs(carpeta, exist_ok=True)
                 print(f"carpeta creada: {carpeta} ")
-        
+            
             return carpeta
+
+        def abrir_carpeta(carpeta):
+            if os.path.exists(carpeta):
+                os.startfile(carpeta)
+            else:
+                messagebox.showerror("Error", "La carpeta donde se guardan las convocatorias no existe.")
+          
           
         def abrir_archivo():
             selected = tabla.selection()
@@ -128,7 +138,7 @@ class App:
         
         frame2 =  customtkinter.CTkFrame(master=self.root)
         
-        button = customtkinter.CTkButton(master=frame2, text="Generar", command=lambda:(crear_carpeta(), Login()) , hover_color="black" )
+        button = customtkinter.CTkButton(master=frame2, text="Generar", command=lambda:(crear_carpeta(), Login(), abrir_carpeta(carpeta=crear_carpeta())) , hover_color="black" )
         button.grid(row = 0, column = 0, padx=10) 
         resultado_label = customtkinter.CTkLabel(master=frame, text="")
         resultado_label.pack(pady=5)         
@@ -169,8 +179,8 @@ class App:
         tabla = ttk.Treeview(frame, columns= ('Nombre', "Direccion"), show='headings')
         tabla.heading('Nombre', text="Archivo")
         tabla.heading('Direccion', text="Direccion del Archivo")
-        tabla.column('Nombre', width=500)
-        tabla.column('Direccion', width=900)
+        tabla.column('Nombre', width=500, anchor = 'center')
+        tabla.column('Direccion', width=900 , anchor = 'center')
         tabla.pack(padx=10, pady=20)
         #datos en la tabls
         def cargar_tabla():
