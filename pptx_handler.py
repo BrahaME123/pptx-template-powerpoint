@@ -20,7 +20,7 @@ def fuente_direccion(dir):
 
 
         
-def generar_power(colonia, lugar, fecha, hora, ruta):
+def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
     ruta_formato = fuente_direccion("formato_3.pptx")
     prs = Presentation(ruta_formato)
 
@@ -62,16 +62,17 @@ def generar_power(colonia, lugar, fecha, hora, ruta):
     for shape in slide.shapes:
 
         if shape.name == 'colonia':
-            replace_text(shape, colonia)
-                                                                        
+            replace_text(shape, colonia)                                  
         elif shape.name == 'lugar':
             replace_text(shape, lugar)
-            
         elif shape.name == 'hora':
             replace_text(shape, hora)
         elif shape.name == 'fecha':
             replace_text(shape,fecha)
-
+        elif shape.name == 'mensaje':
+            replace_text(shape, mensaje)
+        elif shape.name == 'acompaña':
+            replace_text(shape, acompañado)
     contador = get_value()
     # nombre_archivo = f"{contador}.pptx"
     # if nombre_archivo == "":

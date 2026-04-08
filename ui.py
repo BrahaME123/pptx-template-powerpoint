@@ -29,9 +29,10 @@ class App:
             fecha_valor = entry2.get()
             hora_valor = entry3.get()
             lugar_valor = lugar.get()
+            mensaje_valor = mensaje_abajo.get()
+            acompañado_valor = acompañado_por.get()
             
-            
-            if not colonia_valor or not fecha_valor or not hora_valor or not lugar_valor:
+            if not colonia_valor or not fecha_valor or not hora_valor or not lugar_valor or not mensaje_valor or not acompañado_valor:
                 resultado_label.configure(text = "Llena todos los campos para generar el archivo correctamente.")
                 return
             
@@ -44,7 +45,7 @@ class App:
                 
                 if not ruta:
                     return 
-                archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta)
+                archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta, mensaje_valor, acompañado_valor)
                 resultado_label.configure(text=f"Archivo generado correctamente. {ruta}")
                 print(f'powerpoint generado: {ruta} ')
                 
@@ -134,6 +135,11 @@ class App:
         lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: ")
         lugar.pack(pady=12, padx=10)
         
+        mensaje_abajo = customtkinter.CTkEntry(master=frame, placeholder_text="Mensaje adicional.", width=340,  height=90)
+        mensaje_abajo.pack(pady=12, padx=10)
+         
+        acompañado_por = customtkinter.CTkEntry(master=frame, placeholder_text="Acompañados por: ",  width=300)
+        acompañado_por.pack(pady=12,padx=10)
         
         frame2 =  customtkinter.CTkFrame(master=self.root)
         
@@ -152,29 +158,7 @@ class App:
 
         frame2.pack(padx=20, pady=10)
     
-        # frame2 = customtkinter.CTkFrame(master=self.root)
-        # frame2.pack(pady=10, padx=60, fill="x")
-        
-        # frame2.columnconfigure(0, weight=1)
-        # frame2.columnconfigure(1, weight=1)
-        
-        
-        
-        # titulo2 = customtkinter.CTkLabel(master=frame2, text="Archivos Generados Anteriormente", font=("Verdana", 18))
-        # titulo2.grid(row=0, column=0, columnspan=2, pady=15, padx=10)
-         
-
-
-        # guardados = customtkinter.CTkLabel(master=frame2,text="Archivos: ")
-        # guardados.grid(row=1,column=0, columnspan=2, pady=5,padx=15, sticky="w")    
-        # texto1 = customtkinter.CTkLabel(master=frame2, text="ejemplo")
-        # texto1.grid(row=1, column=0, columnspan=2, pady=15, padx=6)
-        
-        # texto2 = customtkinter.CTkLabel(master=frame2, text="ejemplo")
-        # texto2.grid(row=1, column=0, columnspan=2, pady=15, padx=6)
-        
-        # info = customtkinter.CTkLabel(master=frame2, text="Lorem Ipsum",)
-        # info.grid(row=3, column=0, columnspan=2, pady= 20, padx=10)
+      
         tabla = ttk.Treeview(frame, columns= ('Nombre', "Direccion"), show='headings')
         tabla.heading('Nombre', text="Archivo")
         tabla.heading('Direccion', text="Direccion del Archivo")
