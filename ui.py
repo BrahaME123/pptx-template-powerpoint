@@ -116,6 +116,7 @@ class App:
                 resultado_label.configure(text="La convocatoria que intentas abrir no existe.")
             
         
+        
                     
         frame = customtkinter.CTkFrame(master=self.root)
         frame.pack(pady=20, padx=60, fill="both", expand=True)
@@ -123,22 +124,28 @@ class App:
         label = customtkinter.CTkLabel(master=frame, text="Generar Convocatoria", font=("Verdana", 24))
         label.pack(pady=12, padx=10)
         
-        entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Colonia: ")
+        
+        
+        
+        entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Colonia: ", placeholder_text_color="white")
         entry1.pack(pady=12, padx=10)
         
-        entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: ")
+        
+        
+        
+        entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: ", placeholder_text_color="white")
         entry2.pack(pady=12, padx=10)
         
-        entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Hora: ")
+        entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Hora: ", placeholder_text_color="white")
         entry3.pack(pady=12, padx=10)
         
-        lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: ")
+        lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: ", placeholder_text_color="white")
         lugar.pack(pady=12, padx=10)
         
-        mensaje_abajo = customtkinter.CTkEntry(master=frame, placeholder_text="Mensaje adicional.", width=340,  height=90)
+        mensaje_abajo = customtkinter.CTkEntry(master=frame, placeholder_text="Mensaje adicional.", width=340,  height=90,placeholder_text_color="white")
         mensaje_abajo.pack(pady=12, padx=10)
          
-        acompañado_por = customtkinter.CTkEntry(master=frame, placeholder_text="Acompañados por: ",  width=300)
+        acompañado_por = customtkinter.CTkEntry(master=frame, placeholder_text="Acompañados por: ",  width=300, placeholder_text_color="white")
         acompañado_por.pack(pady=12,padx=10)
         
         frame2 =  customtkinter.CTkFrame(master=self.root)
@@ -157,6 +164,8 @@ class App:
         eliminar.grid(row = 0, column = 3, padx=10)
 
         frame2.pack(padx=20, pady=10)
+    
+    
     
       
         tabla = ttk.Treeview(frame, columns= ('Nombre', "Direccion"), show='headings')
