@@ -22,8 +22,10 @@ def fuente_direccion(dir):
         
 def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
     colonia = colonia.title()
+    #HACER: hay un mensaje que viene debajo de el nombre de la colonia
     lugar = lugar.title()
     fecha = fecha.title()
+    #HACER: crear una lista de los dias de la semana para comprobar si están en el mensaje de fecha, si sí, que se muestren en negritas
     hora = hora.title()
     mensaje = mensaje.capitalize()
     acompañado = acompañado.title()
