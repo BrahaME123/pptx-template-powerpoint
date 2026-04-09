@@ -133,7 +133,7 @@ class App:
         
         
         
-        entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: ", placeholder_text_color="white")
+        entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: (dia/mes/año)", placeholder_text_color="white")
         entry2.pack(pady=12, padx=10)
         
         
@@ -143,7 +143,7 @@ class App:
         
         
         
-        lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: ", placeholder_text_color="white")
+        lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: (direccion)", placeholder_text_color="white")
         lugar.pack(pady=12, padx=10)
         
         

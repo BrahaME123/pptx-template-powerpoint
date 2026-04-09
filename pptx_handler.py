@@ -25,7 +25,7 @@ def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
     lugar = lugar.title()
     fecha = fecha.title()
     hora = hora.title()
-    mensaje = mensaje.title()
+    mensaje = mensaje.capitalize()
     acompañado = acompañado.title()
     
     ruta_formato = fuente_direccion("formato_3.pptx")
