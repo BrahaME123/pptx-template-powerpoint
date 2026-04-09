@@ -32,6 +32,8 @@ class App:
             mensaje_valor = mensaje_abajo.get()
             acompañado_valor = acompañado_por.get()
             
+            
+            
             if not colonia_valor or not fecha_valor or not hora_valor or not lugar_valor or not mensaje_valor or not acompañado_valor:
                 resultado_label.configure(text = "Llena todos los campos para generar el archivo correctamente.")
                 return
@@ -126,32 +128,41 @@ class App:
         
         
         
-        
         entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Colonia: ", placeholder_text_color="white")
         entry1.pack(pady=12, padx=10)
-        
         
         
         
         entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: ", placeholder_text_color="white")
         entry2.pack(pady=12, padx=10)
         
+        
+        
         entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Hora: ", placeholder_text_color="white")
         entry3.pack(pady=12, padx=10)
+        
+        
         
         lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: ", placeholder_text_color="white")
         lugar.pack(pady=12, padx=10)
         
+        
+        
         mensaje_abajo = customtkinter.CTkEntry(master=frame, placeholder_text="Mensaje adicional.", width=340,  height=90,placeholder_text_color="white")
         mensaje_abajo.pack(pady=12, padx=10)
+         
          
         acompañado_por = customtkinter.CTkEntry(master=frame, placeholder_text="Acompañados por: ",  width=300, placeholder_text_color="white")
         acompañado_por.pack(pady=12,padx=10)
         
+        
+      
         frame2 =  customtkinter.CTkFrame(master=self.root)
         
         button = customtkinter.CTkButton(master=frame2, text="Generar", command=lambda:(crear_carpeta(), Login(), abrir_carpeta(carpeta=crear_carpeta())) , hover_color="black" )
         button.grid(row = 0, column = 0, padx=10) 
+        
+        
         resultado_label = customtkinter.CTkLabel(master=frame, text="")
         resultado_label.pack(pady=5)         
         

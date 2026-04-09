@@ -21,6 +21,13 @@ def fuente_direccion(dir):
 
         
 def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
+    colonia = colonia.capitalize()
+    lugar = lugar.capitalize()
+    fecha = fecha.capitalize()
+    hora = hora.capitalize()
+    mensaje = mensaje.capitalize()
+    acompañado = acompañado.capitalize()
+    
     ruta_formato = fuente_direccion("formato_3.pptx")
     prs = Presentation(ruta_formato)
 
