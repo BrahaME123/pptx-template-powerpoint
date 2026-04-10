@@ -2,6 +2,7 @@ import customtkinter
 from pptx_handler import generar_power
 from tkinter import filedialog, messagebox
 from tkinter import ttk
+from datetime import datetime
 import os 
 from utils import *
 class App:
@@ -116,7 +117,6 @@ class App:
                 os.startfile(ruta)
             else:
                 resultado_label.configure(text="La convocatoria que intentas abrir no existe.")
-            
         
         
                     
@@ -127,25 +127,44 @@ class App:
         label.pack(pady=12, padx=10)
         
         
-        
         entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Colonia: ", placeholder_text_color="white")
         entry1.pack(pady=12, padx=10)
         
+        
+        #__FECHA CORRECTA        
+        frame_fecha = customtkinter.CTkFrame(master=frame)
+        frame_fecha.pack(pady=12,padx=10)        
+
+        dia = [str(i) for i in range(1,32)]
+        dia_variable = customtkinter.IntVar(value="3") 
+        dia_correcto = customtkinter.CTkOptionMenu(master=frame_fecha, values=dia, variable=dia_variable)
+        dia_correcto.pack(pady=12,padx=10,side="left")
+
+        mes = ["Enero", "Febrero","Marzo", "Abril","Mayo","Junio","Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"]
+        mes_variable = customtkinter.StringVar(value="Enero")
+        fecha_correcta = customtkinter.CTkOptionMenu(master=frame_fecha, values=mes, variable=mes_variable)
+        fecha_correcta.pack(pady=12, padx=10,side="left")
+        
+        año_actual = datetime.now().year
+        año = [str(y) for y in range(año_actual, 1989,-1)]
+        año_variable = customtkinter.IntVar(value=2025)
+        año_opcion =  customtkinter.CTkOptionMenu(master=frame_fecha,  values=año, variable=año_variable)
+        año_opcion.pack(pady=12, padx=10,side="left")      
+        
+        mensaje_final = f"{dia_correcto._variable} de {fecha_correcta} del {str(año_variable)}"
+        print(mensaje_final)
         
         
         entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: (dia/mes/año)", placeholder_text_color="white")
         entry2.pack(pady=12, padx=10)
         
         
-        
         entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Hora: ", placeholder_text_color="white")
         entry3.pack(pady=12, padx=10)
         
         
-        
         lugar = customtkinter.CTkEntry(master=frame, placeholder_text="Lugar: (direccion)", placeholder_text_color="white")
         lugar.pack(pady=12, padx=10)
-        
         
         
         mensaje_abajo = customtkinter.CTkEntry(master=frame, placeholder_text="Mensaje adicional.", width=340,  height=90,placeholder_text_color="white")
@@ -154,11 +173,14 @@ class App:
          
         acompañado_por = customtkinter.CTkEntry(master=frame, placeholder_text="Acompañados por: ",  width=300, placeholder_text_color="white")
         acompañado_por.pack(pady=12,padx=10)
+
+
+      
         
         
       
         frame2 =  customtkinter.CTkFrame(master=self.root)
-        
+        #HACER: REFACTORIZAR CODIGO Y HACER CLASE PARA NO TENER TANTAS FUNCIONES ACA
         button = customtkinter.CTkButton(master=frame2, text="Generar", command=lambda:(crear_carpeta(), Login(), abrir_carpeta(carpeta=crear_carpeta())) , hover_color="black" )
         button.grid(row = 0, column = 0, padx=10) 
         
@@ -171,6 +193,7 @@ class App:
         
         abrir = customtkinter.CTkButton(master=frame2, text="Abrir Convocatoria", command=abrir_archivo, hover_color="green")
         abrir.grid(row = 0, column = 2, padx=10) 
+        #HACER: Try catch por si el archivo  seleccionado está abierto, se muestre una advertencia para que lo cierre
         eliminar = customtkinter.CTkButton(master=frame2, text="Eliminar Convocatoria", command=eliminar_archivo, hover_color="red")
         eliminar.grid(row = 0, column = 3, padx=10)
 
