@@ -118,8 +118,9 @@ class App:
             else:
                 resultado_label.configure(text="La convocatoria que intentas abrir no existe.")
         
-        
-                    
+       
+                
+        #HACER: CREAR FUNCION QUE HAGA TODO LO QUE ESTÁ EN LAMBDA
         frame = customtkinter.CTkFrame(master=self.root)
         frame.pack(pady=20, padx=60, fill="both", expand=True)
                 
@@ -131,29 +132,7 @@ class App:
         entry1.pack(pady=12, padx=10)
         
         
-        #__FECHA CORRECTA        
-        frame_fecha = customtkinter.CTkFrame(master=frame)
-        frame_fecha.pack(pady=12,padx=10)        
-
-        dia = [str(i) for i in range(1,32)]
-        dia_variable = customtkinter.IntVar(value="3") 
-        dia_correcto = customtkinter.CTkOptionMenu(master=frame_fecha, values=dia, variable=dia_variable)
-        dia_correcto.pack(pady=12,padx=10,side="left")
-
-        mes = ["Enero", "Febrero","Marzo", "Abril","Mayo","Junio","Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"]
-        mes_variable = customtkinter.StringVar(value="Enero")
-        fecha_correcta = customtkinter.CTkOptionMenu(master=frame_fecha, values=mes, variable=mes_variable)
-        fecha_correcta.pack(pady=12, padx=10,side="left")
-        
-        año_actual = datetime.now().year
-        año = [str(y) for y in range(año_actual, 1989,-1)]
-        año_variable = customtkinter.IntVar(value=2025)
-        año_opcion =  customtkinter.CTkOptionMenu(master=frame_fecha,  values=año, variable=año_variable)
-        año_opcion.pack(pady=12, padx=10,side="left")      
-        
-        mensaje_final = f"{dia_correcto._variable} de {fecha_correcta} del {str(año_variable)}"
-        print(mensaje_final)
-        
+       
         
         entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: (dia/mes/año)", placeholder_text_color="white")
         entry2.pack(pady=12, padx=10)
