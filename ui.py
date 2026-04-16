@@ -27,6 +27,7 @@ class App:
         
         def Login():
             colonia_valor = entry1.get()
+            reunion_valor = reunion_entry.get()
             fecha_valor = entry2.get()
             hora_valor = entry3.get()
             lugar_valor = lugar.get()
@@ -35,7 +36,7 @@ class App:
             
             
             
-            if not colonia_valor or not fecha_valor or not hora_valor or not lugar_valor or not mensaje_valor or not acompañado_valor:
+            if not colonia_valor or not fecha_valor or not hora_valor or not lugar_valor or not mensaje_valor or not acompañado_valor or not reunion_valor:
                 resultado_label.configure(text = "Llena todos los campos para generar el archivo correctamente.")
                 return
             
@@ -48,13 +49,15 @@ class App:
                 
                 if not ruta:
                     return 
-                archivo = generar_power(colonia_valor, lugar_valor,fecha_valor,hora_valor,ruta, mensaje_valor, acompañado_valor)
+                archivo = generar_power(colonia_valor, lugar_valor,reunion_valor,fecha_valor,hora_valor,ruta, mensaje_valor, acompañado_valor)
                 resultado_label.configure(text=f"Archivo generado correctamente. {ruta}")
                 print(f'powerpoint generado: {ruta} ')
                 
                 nombre_archivo = os.path.basename(ruta)
                 agregar_archivo(nombre_archivo,ruta)
                 cargar_tabla()
+                
+              
         
         def Salir():
             self.root.destroy()
@@ -119,6 +122,7 @@ class App:
                 resultado_label.configure(text="La convocatoria que intentas abrir no existe.")
         
        
+                            
                 
         #HACER: CREAR FUNCION QUE HAGA TODO LO QUE ESTÁ EN LAMBDA
         frame = customtkinter.CTkFrame(master=self.root)
@@ -126,13 +130,13 @@ class App:
                 
         label = customtkinter.CTkLabel(master=frame, text="Generar Convocatoria", font=("Verdana", 24))
         label.pack(pady=12, padx=10)
-        
+            
         
         entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Colonia: ", placeholder_text_color="white")
         entry1.pack(pady=12, padx=10)
         
-        
-       
+        reunion_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Reunion de: ", placeholder_text_color="white")
+        reunion_entry.pack(pady=12, padx=10)
         
         entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Fecha: (dia/mes/año)", placeholder_text_color="white")
         entry2.pack(pady=12, padx=10)

@@ -20,10 +20,11 @@ def fuente_direccion(dir):
 
 
         
-def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
+def generar_power(colonia, lugar,reunion, fecha, hora, ruta , mensaje, acompañado):
     colonia = colonia.title()
     #HACER: hay un mensaje que viene debajo de el nombre de la colonia
     lugar = lugar.title()
+    reunion = reunion.upper()
     fecha = fecha.title()
     #HACER: crear una lista de los dias de la semana para comprobar si están en el mensaje de fecha, si sí, que se muestren en negritas
     hora = hora.title()
@@ -65,7 +66,6 @@ def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
                 break
 
 
-    
 
 
     for shape in slide.shapes:
@@ -74,6 +74,8 @@ def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
             replace_text(shape, colonia)                                  
         elif shape.name == 'lugar':
             replace_text(shape, lugar)
+        elif shape.name == 'reunion':
+            replace_text(shape, reunion)
         elif shape.name == 'hora':
             replace_text(shape, hora)
         elif shape.name == 'fecha':
@@ -88,7 +90,7 @@ def generar_power(colonia, lugar, fecha, hora, ruta, mensaje, acompañado):
         # print('ERR:: NOMBRE_ARCHIVO FALLÓ')
     # archivo_salida = os.path.join(os.getcwd(), nombre_archivo)
     
-    
+  
     prs.save(ruta)
     os.startfile(ruta)
     return ruta
