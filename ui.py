@@ -4,12 +4,14 @@ from tkinter import filedialog, messagebox
 from tkinter import ttk
 from datetime import datetime
 import os 
-from utils import *
+import ctypes 
+from ctypes import  wintypes
+from utils import * 
+
 class App:
     def __init__(self):
         customtkinter.set_appearance_mode("dark")
         customtkinter.set_default_color_theme("green")
-        
         self.root = customtkinter.CTk()
         self.x, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
         self.root.geometry("%dx%d+0+0" % (self.x, self.h-80))
@@ -23,7 +25,6 @@ class App:
         
     def _build_ui(self):
         
-     
         
         def Login():
             colonia_valor = entry1.get()
@@ -89,10 +90,13 @@ class App:
             
             print(ruta)
             
-            
+                    
         def crear_carpeta():
+            buf = ctypes.create_unicode_buffer(wintypes.MAX_PATH)
+            ctypes.windll.shell32.SHGetFolderPathW(None, 5 , None, 0, buf)
+            directorio = buf.value
             
-            directorio =  os.path.join(os.path.expanduser("~"),"Documentos")
+            
             carpeta = os.path.join(directorio,"CONVOCATORIAS GENERADAS")
             if not os.path.exists(carpeta):
                 os.makedirs(carpeta, exist_ok=True)
